@@ -89,12 +89,82 @@ Content-Type: application/json
 Authorization: Bearer <your_access_token>
 ```
 
-**Body (raw JSON):**
+**Body (raw JSON) - Ví dụ cho trang review đồ ăn:**
 ```json
 {
-  "name": "iPhone 15 Pro",
-  "description": "Latest iPhone with A17 Pro chip",
-  "price": 999.99
+  "name": "Phở Bò Đặc Biệt",
+  "description": "Phở bò truyền thống với thịt bò tái, chín và gân",
+  "image": "https://example.com/images/pho-bo.jpg",
+  "images": [
+    "https://example.com/images/pho-bo-1.jpg",
+    "https://example.com/images/pho-bo-2.jpg",
+    "https://example.com/images/pho-bo-3.jpg"
+  ],
+  "price": 85000,
+  "originalPrice": 95000,
+  "rating": 4.5,
+  "reviewCount": 128,
+  "category": "Món chính",
+  "restaurantName": "Phở Hà Nội",
+  "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+  "cuisineType": "Vietnamese",
+  "tags": ["traditional", "spicy", "beef", "noodles"],
+  "calories": 450,
+  "ingredients": "Bánh phở, thịt bò tái, thịt bò chín, gân bò, hành lá, rau thơm",
+  "allergens": "gluten",
+  "portionSize": "1 tô lớn",
+  "priceRange": "$$",
+  "preparationTime": 15,
+  "spiceLevel": 2,
+  "isAvailable": true
+}
+```
+
+**Lưu ý về Body:**
+- `name` (required): Tên món ăn, phải là string và không được rỗng
+- `description` (optional): Mô tả món ăn
+- `image` (optional): URL hình ảnh chính, phải là URL hợp lệ
+- `images` (optional): Mảng các URL hình ảnh bổ sung
+- `price` (required): Giá hiện tại, phải là số và >= 0
+- `originalPrice` (optional): Giá gốc (để hiển thị giá khuyến mãi)
+- `rating` (optional): Đánh giá sao từ 0-5, mặc định là 0
+- `reviewCount` (optional): Số lượng đánh giá, mặc định là 0
+- `category` (optional): Loại món ăn: "Món chính", "Món tráng miệng", "Đồ uống", "Khai vị", etc.
+- `restaurantName` (optional): Tên nhà hàng/quán
+- `restaurantAddress` (optional): Địa chỉ nhà hàng/quán
+- `cuisineType` (optional): Loại ẩm thực: "Vietnamese", "Italian", "Japanese", "Chinese", "Thai", etc.
+- `tags` (optional): Mảng tags: ["spicy", "vegetarian", "vegan", "gluten-free", "traditional", "beef", "chicken", etc.]
+- `calories` (optional): Calo (số nguyên)
+- `ingredients` (optional): Thành phần món ăn
+- `allergens` (optional): Dị ứng: "nuts", "dairy", "gluten", "seafood", etc.
+- `portionSize` (optional): Khẩu phần: "Small", "Medium", "Large", "1 phần", etc.
+- `priceRange` (optional): Phạm vi giá: "$", "$$", "$$$", "$$$$"
+- `preparationTime` (optional): Thời gian chuẩn bị (phút)
+- `spiceLevel` (optional): Độ cay từ 0-5, mặc định là 0
+- `isAvailable` (optional): Có sẵn không, mặc định là true
+
+**Ví dụ Body tối thiểu (chỉ có các trường required):**
+```json
+{
+  "name": "Bánh Mì Thịt Nướng",
+  "price": 35000
+}
+```
+
+**Ví dụ Body cho món tráng miệng:**
+```json
+{
+  "name": "Chè Đậu Xanh",
+  "description": "Chè đậu xanh truyền thống với nước cốt dừa",
+  "image": "https://example.com/images/che-dau-xanh.jpg",
+  "price": 25000,
+  "rating": 4.2,
+  "category": "Món tráng miệng",
+  "restaurantName": "Chè Ngọc",
+  "cuisineType": "Vietnamese",
+  "tags": ["sweet", "vegetarian", "traditional"],
+  "calories": 180,
+  "isAvailable": true
 }
 ```
 
@@ -102,9 +172,31 @@ Authorization: Bearer <your_access_token>
 ```json
 {
   "id": "uuid",
-  "name": "iPhone 15 Pro",
-  "description": "Latest iPhone with A17 Pro chip",
-  "price": 999.99,
+  "name": "Phở Bò Đặc Biệt",
+  "description": "Phở bò truyền thống với thịt bò tái, chín và gân",
+  "image": "https://example.com/images/pho-bo.jpg",
+  "images": [
+    "https://example.com/images/pho-bo-1.jpg",
+    "https://example.com/images/pho-bo-2.jpg",
+    "https://example.com/images/pho-bo-3.jpg"
+  ],
+  "price": 85000,
+  "originalPrice": 95000,
+  "rating": 4.5,
+  "reviewCount": 128,
+  "category": "Món chính",
+  "restaurantName": "Phở Hà Nội",
+  "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+  "cuisineType": "Vietnamese",
+  "tags": ["traditional", "spicy", "beef", "noodles"],
+  "calories": 450,
+  "ingredients": "Bánh phở, thịt bò tái, thịt bò chín, gân bò, hành lá, rau thơm",
+  "allergens": "gluten",
+  "portionSize": "1 tô lớn",
+  "priceRange": "$$",
+  "preparationTime": 15,
+  "spiceLevel": 2,
+  "isAvailable": true,
   "userId": "user_uuid",
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z"
@@ -124,9 +216,30 @@ Authorization: Bearer <your_access_token>
 [
   {
     "id": "uuid",
-    "name": "iPhone 15 Pro",
-    "description": "Latest iPhone with A17 Pro chip",
-    "price": 999.99,
+    "name": "Phở Bò Đặc Biệt",
+    "description": "Phở bò truyền thống với thịt bò tái, chín và gân",
+    "image": "https://example.com/images/pho-bo.jpg",
+    "images": [
+      "https://example.com/images/pho-bo-1.jpg",
+      "https://example.com/images/pho-bo-2.jpg"
+    ],
+    "price": 85000,
+    "originalPrice": 95000,
+    "rating": 4.5,
+    "reviewCount": 128,
+    "category": "Món chính",
+    "restaurantName": "Phở Hà Nội",
+    "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+    "cuisineType": "Vietnamese",
+    "tags": ["traditional", "spicy", "beef"],
+    "calories": 450,
+    "ingredients": "Bánh phở, thịt bò tái, thịt bò chín",
+    "allergens": "gluten",
+    "portionSize": "1 tô lớn",
+    "priceRange": "$$",
+    "preparationTime": 15,
+    "spiceLevel": 2,
+    "isAvailable": true,
     "userId": "user_uuid",
     "createdAt": "2024-01-01T00:00:00.000Z",
     "updatedAt": "2024-01-01T00:00:00.000Z",
@@ -153,9 +266,30 @@ Authorization: Bearer <your_access_token>
 ```json
 {
   "id": "uuid",
-  "name": "iPhone 15 Pro",
-  "description": "Latest iPhone with A17 Pro chip",
-  "price": 999.99,
+  "name": "Phở Bò Đặc Biệt",
+  "description": "Phở bò truyền thống với thịt bò tái, chín và gân",
+  "image": "https://example.com/images/pho-bo.jpg",
+  "images": [
+    "https://example.com/images/pho-bo-1.jpg",
+    "https://example.com/images/pho-bo-2.jpg"
+  ],
+  "price": 85000,
+  "originalPrice": 95000,
+  "rating": 4.5,
+  "reviewCount": 128,
+  "category": "Món chính",
+  "restaurantName": "Phở Hà Nội",
+  "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+  "cuisineType": "Vietnamese",
+  "tags": ["traditional", "spicy", "beef"],
+  "calories": 450,
+  "ingredients": "Bánh phở, thịt bò tái, thịt bò chín",
+  "allergens": "gluten",
+  "portionSize": "1 tô lớn",
+  "priceRange": "$$",
+  "preparationTime": 15,
+  "spiceLevel": 2,
+  "isAvailable": true,
   "userId": "user_uuid",
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z",
@@ -181,9 +315,15 @@ Authorization: Bearer <your_access_token>
 **Body (raw JSON):** (Tất cả các field đều optional)
 ```json
 {
-  "name": "iPhone 15 Pro Max",
-  "description": "Updated description",
-  "price": 1199.99
+  "name": "Phở Bò Đặc Biệt Premium",
+  "description": "Phở bò cao cấp với thịt bò wagyu",
+  "image": "https://example.com/images/pho-bo-premium.jpg",
+  "price": 120000,
+  "originalPrice": 150000,
+  "rating": 4.8,
+  "reviewCount": 256,
+  "spiceLevel": 3,
+  "isAvailable": true
 }
 ```
 
@@ -191,9 +331,30 @@ Authorization: Bearer <your_access_token>
 ```json
 {
   "id": "uuid",
-  "name": "iPhone 15 Pro Max",
-  "description": "Updated description",
-  "price": 1199.99,
+  "name": "Phở Bò Đặc Biệt Premium",
+  "description": "Phở bò cao cấp với thịt bò wagyu",
+  "image": "https://example.com/images/pho-bo-premium.jpg",
+  "images": [
+    "https://example.com/images/pho-bo-1.jpg",
+    "https://example.com/images/pho-bo-2.jpg"
+  ],
+  "price": 120000,
+  "originalPrice": 150000,
+  "rating": 4.8,
+  "reviewCount": 256,
+  "category": "Món chính",
+  "restaurantName": "Phở Hà Nội",
+  "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+  "cuisineType": "Vietnamese",
+  "tags": ["traditional", "spicy", "beef"],
+  "calories": 450,
+  "ingredients": "Bánh phở, thịt bò tái, thịt bò chín",
+  "allergens": "gluten",
+  "portionSize": "1 tô lớn",
+  "priceRange": "$$",
+  "preparationTime": 15,
+  "spiceLevel": 3,
+  "isAvailable": true,
   "userId": "user_uuid",
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z"
@@ -216,9 +377,30 @@ Authorization: Bearer <your_access_token>
 ```json
 {
   "id": "uuid",
-  "name": "iPhone 15 Pro",
-  "description": "Latest iPhone with A17 Pro chip",
-  "price": 999.99,
+  "name": "Phở Bò Đặc Biệt",
+  "description": "Phở bò truyền thống với thịt bò tái, chín và gân",
+  "image": "https://example.com/images/pho-bo.jpg",
+  "images": [
+    "https://example.com/images/pho-bo-1.jpg",
+    "https://example.com/images/pho-bo-2.jpg"
+  ],
+  "price": 85000,
+  "originalPrice": 95000,
+  "rating": 4.5,
+  "reviewCount": 128,
+  "category": "Món chính",
+  "restaurantName": "Phở Hà Nội",
+  "restaurantAddress": "123 Đường Láng, Đống Đa, Hà Nội",
+  "cuisineType": "Vietnamese",
+  "tags": ["traditional", "spicy", "beef"],
+  "calories": 450,
+  "ingredients": "Bánh phở, thịt bò tái, thịt bò chín",
+  "allergens": "gluten",
+  "portionSize": "1 tô lớn",
+  "priceRange": "$$",
+  "preparationTime": 15,
+  "spiceLevel": 2,
+  "isAvailable": true,
   "userId": "user_uuid",
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z"

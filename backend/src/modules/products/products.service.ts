@@ -12,16 +12,28 @@ export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createProductDto: CreateProductDto, userId: string) {
-    return this.prisma.product.create({
-      data: {
-        ...createProductDto,
-        userId,
-      },
-    });
+    // Serialize arrays to JSON strings for Prisma
+    const data = {
+      ...createProductDto,
+      images: createProductDto.images
+        ? JSON.stringify(createProductDto.images)
+        : null,
+      tags: createProductDto.tags ? JSON.stringify(createProductDto.tags) : null,
+      userId,
+    };
+
+    const product = await this.prisma.product.create({ data });
+
+    // Deserialize JSON strings back to arrays
+    return {
+      ...product,
+      images: product.images ? JSON.parse(product.images) : null,
+      tags: product.tags ? JSON.parse(product.tags) : null,
+    };
   }
 
   async findAll() {
-    return this.prisma.product.findMany({
+    const products = await this.prisma.product.findMany({
       include: {
         user: {
           select: {
@@ -32,6 +44,13 @@ export class ProductsService {
         },
       },
     });
+
+    // Deserialize JSON strings back to arrays
+    return products.map((product) => ({
+      ...product,
+      images: product.images ? JSON.parse(product.images) : null,
+      tags: product.tags ? JSON.parse(product.tags) : null,
+    }));
   }
 
   async findOne(id: string) {
@@ -52,7 +71,12 @@ export class ProductsService {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
 
-    return product;
+    // Deserialize JSON strings back to arrays
+    return {
+      ...product,
+      images: product.images ? JSON.parse(product.images) : null,
+      tags: product.tags ? JSON.parse(product.tags) : null,
+    };
   }
 
   async update(id: string, updateProductDto: UpdateProductDto, userId: string) {
@@ -62,10 +86,32 @@ export class ProductsService {
       throw new ForbiddenException('You can only update your own products');
     }
 
-    return this.prisma.product.update({
+    // Serialize arrays to JSON strings for Prisma
+    const data: any = { ...updateProductDto };
+    if (updateProductDto.images !== undefined) {
+      data.images = updateProductDto.images
+        ? JSON.stringify(updateProductDto.images)
+        : null;
+    }
+    if (updateProductDto.tags !== undefined) {
+      data.tags = updateProductDto.tags
+        ? JSON.stringify(updateProductDto.tags)
+        : null;
+    }
+
+    const updatedProduct = await this.prisma.product.update({
       where: { id },
-      data: updateProductDto,
+      data,
     });
+
+    // Deserialize JSON strings back to arrays
+    return {
+      ...updatedProduct,
+      images: updatedProduct.images
+        ? JSON.parse(updatedProduct.images)
+        : null,
+      tags: updatedProduct.tags ? JSON.parse(updatedProduct.tags) : null,
+    };
   }
 
   async remove(id: string, userId: string) {

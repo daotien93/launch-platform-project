@@ -21,12 +21,30 @@ model User {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String?
-  price       Float
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String   @id @default(uuid())
+  name            String
+  description     String?
+  image           String?  // URL hình ảnh chính
+  images          String?  // JSON array: ["url1", "url2"] - Nhiều hình ảnh
+  price           Float    // Giá hiện tại
+  originalPrice   Float?   // Giá gốc (để hiển thị giá khuyến mãi)
+  rating          Float?   @default(0) // Đánh giá sao (0-5)
+  reviewCount     Int      @default(0) // Số lượng đánh giá
+  category        String?  // Loại món ăn: "Món chính", "Món tráng miệng", "Đồ uống", etc.
+  restaurantName  String?  // Tên nhà hàng/quán
+  restaurantAddress String? // Địa chỉ nhà hàng/quán
+  cuisineType     String?  // Loại ẩm thực: "Vietnamese", "Italian", "Japanese", etc.
+  tags            String?  // JSON array: ["spicy", "vegetarian", "vegan"] - Tags
+  calories        Int?     // Calo
+  ingredients     String?  // Thành phần món ăn
+  allergens       String?  // Dị ứng: "nuts", "dairy", "gluten", etc.
+  portionSize     String?  // Khẩu phần: "Small", "Medium", "Large", "1 portion"
+  priceRange      String?  // Phạm vi giá: "$", "$$", "$$$", "$$$$"
+  preparationTime Int?     // Thời gian chuẩn bị (phút)
+  spiceLevel      Float?   @default(0) // Độ cay (0-5)
+  isAvailable     Boolean  @default(true) // Có sẵn không
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
