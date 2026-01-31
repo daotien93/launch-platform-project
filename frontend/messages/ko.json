@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "오늘 <span>뭐 먹을까</span>?",
+    "subtitle": "뭐 먹을지 모르겠어? 우주가 결정하게 해! 돌려서 가장 가까운 식당으로 가자.",
+    "searchPlaceholder": "식당 검색...",
+    "randomButton": "랜덤 돌리기",
+    "categories": "카테고리",
+    "all": "모두",
+    "reviews": "리뷰",
+    "language": "언어"
+  },
+  "details": {
+    "reviews": "리뷰 & 코멘트",
+    "noReviews": "아직 리뷰가 없어요. 첫 번째 리뷰를 남겨주세요!",
+    "keywords": "키워드",
+    "viewOnMaps": "Google Maps에서 보기 →"
+  }
+}

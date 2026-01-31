@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "What to <span>eat</span> today?",
+    "subtitle": "Don't know what to eat? Let the universe decide! Spin and go to the nearest restaurant.",
+    "searchPlaceholder": "Search for restaurants...",
+    "randomButton": "Random spin",
+    "categories": "Categories",
+    "all": "All",
+    "reviews": "reviews",
+    "language": "Language"
+  },
+  "details": {
+    "reviews": "Reviews & Comments",
+    "noReviews": "No reviews yet. Be the first to review!",
+    "keywords": "Keywords",
+    "viewOnMaps": "View on Google Maps →"
+  }
+}

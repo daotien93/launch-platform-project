@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "Hôm nay <span>ăn gì</span> đây?",
+    "subtitle": "Không biết ăn gì? Để vũ trụ quyết định! Quay một cái và đến ngay quán ăn gần nhất.",
+    "searchPlaceholder": "Tìm quán ăn...",
+    "randomButton": "Quay ngẫu nhiên",
+    "categories": "Danh mục",
+    "all": "Tất cả",
+    "reviews": "đánh giá",
+    "language": "Ngôn ngữ"
+  },
+  "details": {
+    "reviews": "Đánh giá & Nhận xét",
+    "noReviews": "Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!",
+    "keywords": "Từ khoá",
+    "viewOnMaps": "Xem trên Google Maps →"
+  }
+}
