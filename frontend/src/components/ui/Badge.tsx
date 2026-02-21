@@ -9,7 +9,7 @@ export const Badge = ({
 }) => {
   const style =
     variant === "success"
-      ? "bg-rgba-emerald-20 text-emerald-300"
+      ? "bg-rgba-accent-20 text-emerald-300"
       : "bg-rgba-white-10 text-white";
 
   return (
